@@ -2,6 +2,7 @@ import { h, createContext, ComponentChildren } from 'preact';
 import { Configurations } from '../models';
 import { useContext, useRef } from 'preact/hooks';
 import DodoApiRouter from '../services/dodoApi';
+import WalletProviderProvider from './WalletProvider';
 
 const ConfigContext = createContext<Configurations>({} as Configurations);
 const ServiceContext = createContext<DodoApiRouter | undefined>(undefined);
@@ -18,9 +19,11 @@ export const WidgetProviders = ({ children, config }: Props) => {
   }));
   return (
     <ConfigContext.Provider value={config}>
-      <ServiceContext.Provider value={services.current}>
+      <WalletProviderProvider>
+        <ServiceContext.Provider value={services.current}>
           {children}
-      </ServiceContext.Provider>
+        </ServiceContext.Provider>
+      </WalletProviderProvider>
     </ConfigContext.Provider>
   );
 };

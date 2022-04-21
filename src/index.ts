@@ -1,6 +1,6 @@
 import { h, render } from 'preact';
 import { App } from './App';
-import loader from './loader';
+import loader from './utils/loader';
 import { Configurations } from './models';
 
 /**
@@ -9,9 +9,16 @@ import { Configurations } from './models';
  */
 const defaultConfig: Configurations = {
   debug: false,
+  infuraId: '',
+  rpcUrls: {
+    ethereum: {
+      mainnet: '',
+      rinkeby: '',
+    }
+  },
   dodoRouterApiUrl: 'https://route-api.dodoex.io/dodoapi',
-  targetId: 'cross-chain-swap-widget',
-  style: {}
+  style: {},
+  targetId: 'cross-chain-swap-widget'
 };
 
 // main entry point - calls loader and render Preact app into supplied element

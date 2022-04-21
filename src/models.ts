@@ -6,9 +6,16 @@ interface InfraConfigurations {
 
 export interface AppConfigurations {
   debug: boolean;
-  targetId: string;
   dodoRouterApiUrl: string;
+  infuraId: string;
+  rpcUrls: {
+    ethereum: {
+      mainnet: string;
+      rinkeby: string;
+    }
+  };
   style: StyleConfig;
+  targetId: string;
 }
 
 export type Configurations = InfraConfigurations & AppConfigurations;
