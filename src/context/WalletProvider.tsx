@@ -1,14 +1,13 @@
 import { h, createContext, ComponentChildren } from "preact";
 import { useCallback, useContext, useEffect, useState } from "preact/hooks";
-import { Web3Provider } from "@ethersproject/providers";
-import { Signer } from "@ethersproject/abstract-signer";
+import { JsonRpcSigner, Web3Provider } from "@ethersproject/providers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useConfig } from ".";
 
 interface IWalletProviderContext {
   walletProvider: Web3Provider | undefined;
-  signer: Signer | undefined;
+  signer: JsonRpcSigner | undefined;
   web3Modal: Web3Modal | undefined;
   connect: Web3Modal["connect"];
   disconnect: Web3Modal["clearCachedProvider"];
@@ -28,7 +27,7 @@ export default function WalletProviderProvider ({children}: {children: Component
     undefined | Web3Provider
   >();
 
-  const [signer, setSigner] = useState<Signer>();
+  const [signer, setSigner] = useState<JsonRpcSigner>();
 
   const [web3Modal, setWeb3Modal] = useState<undefined | Web3Modal>();
 
