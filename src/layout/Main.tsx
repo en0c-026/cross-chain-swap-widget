@@ -6,9 +6,10 @@ import HyphenBridge from '../routes/HyphenBridge';
 import { useConfig } from '../context';
 import DodoTrade from '../routes/DodoTrade';
 import Container from '../components/Container';
+import AccountManager from '../components/AccountManager';
 
 const Main = () => {
-  const { style: { mainContainer } } = useConfig();
+  const { style: { mainContainer } } = useConfig()
   return (
     <Grommet theme={theme}>
       <Container
@@ -22,7 +23,7 @@ const Main = () => {
           elevation: mainContainer?.elevation,
           fill: mainContainer?.fill,
           flex: mainContainer?.flex,
-          gap: mainContainer?.gap,
+          gap: mainContainer?.gap ? mainContainer.gap : 'small',
           height: mainContainer?.height,
           justify: mainContainer?.justify,
           margin: mainContainer?.margin,
@@ -32,6 +33,7 @@ const Main = () => {
           width: mainContainer?.width ? mainContainer.width : { max: 'large' }
         }}
       >
+        <AccountManager />
         <Router
           routes={{
             '/': <RouteComponent component={HyphenBridge} />,
