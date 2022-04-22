@@ -37,6 +37,7 @@ export type CustomBox = Omit<
 export interface StyleConfig {
   header?: CustomBox;
   mainContainer?: CustomBox;
+  themeMode?: 'dark' | 'light';
 }
 
 export interface ILiquidtySource {
