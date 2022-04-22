@@ -6,29 +6,29 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useConfig } from ".";
 
 interface IWalletProviderContext {
-  walletProvider: Web3Provider | undefined;
-  signer: JsonRpcSigner | undefined;
-  web3Modal: Web3Modal | undefined;
-  connect: Web3Modal["connect"];
-  disconnect: Web3Modal["clearCachedProvider"];
   accounts: string[] | undefined;
+  connect: Web3Modal["connect"];
   currentChainId: number | undefined;
+  disconnect: Web3Modal["clearCachedProvider"];
   isLoggedIn: boolean;
   rawEthereumProvider: undefined | any;
+  signer: JsonRpcSigner | undefined;
+  walletProvider: Web3Provider | undefined;
+  web3Modal: Web3Modal | undefined;
 }
 
 const WalletProviderContext = createContext<IWalletProviderContext | null>(null);
 
-export default function WalletProviderProvider ({children}: {children: ComponentChildren}) {
-  
+export default function WalletProviderProvider({ children }: { children: ComponentChildren }) {
+
   const { infuraId } = useConfig();
-  const [walletProvider, setWalletProvider] = useState<undefined | Web3Provider>();
-  const [signer, setSigner] = useState<JsonRpcSigner>();
-  const [web3Modal, setWeb3Modal] = useState<undefined | Web3Modal>();
-  const [rawEthereumProvider, setRawEthereumProvider] = useState<any>();
   const [accounts, setAccounts] = useState<string[]>();
   const [currentChainId, setCurrentChainId] = useState<number>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [rawEthereumProvider, setRawEthereumProvider] = useState<any>();
+  const [signer, setSigner] = useState<JsonRpcSigner>();
+  const [walletProvider, setWalletProvider] = useState<undefined | Web3Provider>();
+  const [web3Modal, setWeb3Modal] = useState<undefined | Web3Modal>();
 
   useEffect(() => {
     if (
@@ -174,7 +174,7 @@ export default function WalletProviderProvider ({children}: {children: Component
         walletProvider,
         web3Modal,
       }}
-      >
+    >
       {children}
     </WalletProviderContext.Provider>
   );

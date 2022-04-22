@@ -9,6 +9,7 @@ import { Configurations } from './models';
  */
 const defaultConfig: Configurations = {
   debug: false,
+  defaultChainId: 1,
   infuraId: '',
   rpcUrls: {
     ethereum: {
@@ -16,7 +17,7 @@ const defaultConfig: Configurations = {
       rinkeby: '',
     }
   },
-  dodoRouterApiUrl: 'https://route-api.dodoex.io/dodoapi',
+  swapApiBaseUrl: 'https://api.1inch.io/v4.0',
   style: {},
   targetId: 'cross-chain-swap-widget'
 };

@@ -6,7 +6,8 @@ interface InfraConfigurations {
 
 export interface AppConfigurations {
   debug: boolean;
-  dodoRouterApiUrl: string;
+  swapApiBaseUrl: string;
+  defaultChainId: number;
   infuraId: string;
   rpcUrls: {
     ethereum: {
@@ -38,3 +39,31 @@ export interface StyleConfig {
   mainContainer?: CustomBox;
 }
 
+export interface ILiquidtySource {
+  id: string;
+  title: string;
+  img: string;
+}
+
+export interface IToken {
+  symbol: string;
+  name: string;
+  address: string;
+  decimals: number;
+  logoURI: string;
+}
+export interface IPreset {
+  complexityLevel: number;
+  mainRouteParts: number;
+  parts: number;
+  virtualParts: number;
+}
+
+export interface ITransaction {
+  from: string,
+  to: string,
+  data: string,
+  value: string,
+  gasPrice: string,
+  gas: string
+}
