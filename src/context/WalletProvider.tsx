@@ -17,22 +17,15 @@ interface IWalletProviderContext {
   rawEthereumProvider: undefined | any;
 }
 
-const WalletProviderContext = createContext<IWalletProviderContext | null>(
-  null
-);
+const WalletProviderContext = createContext<IWalletProviderContext | null>(null);
 
 export default function WalletProviderProvider ({children}: {children: ComponentChildren}) {
+  
   const { infuraId } = useConfig();
-  const [walletProvider, setWalletProvider] = useState<
-    undefined | Web3Provider
-  >();
-
+  const [walletProvider, setWalletProvider] = useState<undefined | Web3Provider>();
   const [signer, setSigner] = useState<JsonRpcSigner>();
-
   const [web3Modal, setWeb3Modal] = useState<undefined | Web3Modal>();
-
   const [rawEthereumProvider, setRawEthereumProvider] = useState<any>();
-
   const [accounts, setAccounts] = useState<string[]>();
   const [currentChainId, setCurrentChainId] = useState<number>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -171,15 +164,15 @@ export default function WalletProviderProvider ({children}: {children: Component
   return (
     <WalletProviderContext.Provider
       value={{
-        rawEthereumProvider,
-        walletProvider,
-        signer,
-        web3Modal,
-        connect,
-        disconnect,
         accounts,
+        connect,
         currentChainId,
+        disconnect,
         isLoggedIn,
+        rawEthereumProvider,
+        signer,
+        walletProvider,
+        web3Modal,
       }}
       >
       {children}
