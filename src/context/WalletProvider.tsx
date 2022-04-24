@@ -5,7 +5,7 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useConfig } from ".";
 import { ChainConfig } from "../models";
-import { hexlify } from "@ethersproject/bytes";
+import { hexValue } from "@ethersproject/bytes";
 
 interface IWalletProviderContext {
   accounts: string[] | undefined;
@@ -243,7 +243,8 @@ export default function WalletProviderProvider({ children }: { children: Compone
   }, [web3Modal]);
 
   const switchChain = useCallback(async (targetChain: ChainConfig) => {
-    const chainIdHex = hexlify(targetChain.chainId);
+    const chainIdHex = hexValue(targetChain.chainId);
+    console.log('chainIdHex', chainIdHex)
     try {
       await rawEthereumProvider.request({
         method: 'wallet_switchEthereumChain',
