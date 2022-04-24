@@ -26,7 +26,7 @@ export default function AccountManager() {
     <Container
       style={{
         direction: 'row',
-        gap: 'xxsmall',
+        gap: 'xsmall',
         align: 'center',
       }}
     >

@@ -1,19 +1,20 @@
-import { Avatar, Box, Button, Text } from 'grommet'
+import { Avatar, Button, Text } from 'grommet'
 import { h } from 'preact'
 import { useConfig } from '../context';
 import { useRouter } from '../layout/Router'
 import Container from './Container';
 
-const ButtonTitle = ({ path, label }) => (
+
+const ButtonTitle = ({ active, path, label }) => (
   <Container
     style={{
       align: 'center',
-      border: true,
       direction: 'row',
       gap: 'xsmall',
-      margin: 'xsmall',
-      pad: { vertical: 'xsmall', horizontal: 'small' },
-      round: 'xsmall'
+      pad: { vertical: 'xxsmall', horizontal: 'xsmall' },
+      round: 'small',
+      border: active ? true : false,
+      elevation: active ? 'small' : 'none',
     }}>
     <Avatar size='small' src={path} />
     <Text size="small">{label}</Text>
@@ -21,7 +22,7 @@ const ButtonTitle = ({ path, label }) => (
 );
 
 export default function Header() {
-  const { setRoute } = useRouter();
+  const { setRoute, route } = useRouter();
   const { style: { header } } = useConfig();
   return (
     <Container
@@ -30,35 +31,51 @@ export default function Header() {
         alignContent: header?.alignContent,
         alignSelf: header?.alignSelf,
         background: header?.background,
-        border: header?.border ? header.border : true,
+        border: header?.border,
         direction: 'row',
         elevation: header?.elevation,
         fill: header?.fill,
+        focusIndicator: header?.focusIndicator,
         flex: header?.flex,
-        gap: header?.gap ? header.gap : 'small',
+        gap: header?.gap ? header.gap : 'xsmall',
         height: header?.height,
-        justify: header?.justify,
+        justify: header?.justify ? header.justify : 'between',
         margin: header?.margin,
-        pad: header?.pad ? header.pad : { horizontal: 'large' },
+        pad: header?.pad,
         responsive: header?.responsive,
         round: header?.round,
         width: header?.width
       }}
     >
-      <Button
-        label={
-          <ButtonTitle path='https://raw.githubusercontent.com/en0c-026/cross-chain-swap-widget/master/dev/hyphen-logo.png' label='Hyphen Bridge' />
-        }
-        onClick={() => setRoute('/')}
-        plain
-      />
-      <Button
-        label={
-          <ButtonTitle path='https://raw.githubusercontent.com/en0c-026/cross-chain-swap-widget/master/dev/dodo-logo.png' label='DODO Trade' />
-        }
-        onClick={() => setRoute('/dodo-trade')}
-        plain
-      />
+      <Container
+        style={{
+          direction: 'row',
+          gap: 'xsmall'
+        }}>
+        <Button
+          label={
+            <ButtonTitle
+              active={route === '/' ? true : false}
+              path='https://raw.githubusercontent.com/en0c-026/cross-chain-swap-widget/master/dev/hyphen-logo.png'
+              label='Hyphen Bridge'
+            />
+          }
+          onClick={() => setRoute('/')}
+          plain
+        />
+        <Button
+          label={
+            <ButtonTitle
+              active={route === '/1inch-trade' ? true : false}
+              path='https://raw.githubusercontent.com/en0c-026/cross-chain-swap-widget/master/dev/1inch-logo.png'
+              label='1inch Swap'
+            />
+          }
+          onClick={() => setRoute('/1inch-trade')}
+          plain
+        />
+      </Container>
+
     </Container >
   )
 }
