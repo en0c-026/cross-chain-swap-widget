@@ -18,6 +18,7 @@ export default function Container({ children, style }: ContainerProps) {
       direction={style.direction}
       elevation={style.elevation}
       fill={style.fill}
+      focusIndicator={style.focusIndicator}
       flex={style.flex}
       gap={style.gap}
       height={style.height}
