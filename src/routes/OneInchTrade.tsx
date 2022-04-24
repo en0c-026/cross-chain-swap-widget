@@ -3,7 +3,7 @@ import { Box } from 'grommet'
 import Header from '../components/Header';
 import Container from '../components/Container';
 
-export default function DodoTrade() {
+export default function OneInchTrade() {
   return (
     <div>
       <Header />
@@ -16,8 +16,6 @@ export default function DodoTrade() {
           
         }}
       >
-
-        Dodo Trade
 
       </Container>
     </div>

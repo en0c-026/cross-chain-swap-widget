@@ -1,7 +1,7 @@
 import { h, createContext, VNode, ComponentType, createElement } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 
-const DEFAULT_ROUTE = '/';
+const DEFAULT_ROUTE = '/1inch-trade';
 
 interface Props {
     /**

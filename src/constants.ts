@@ -13,39 +13,7 @@ export const ERC20Abi = [
 
 export const theme = deepMerge(grommet, {
   global: {
-    font: {
-      family: "'Metric', Arial, sans-serif",
-      face: `
-        @font-face {
-          font-family: "Metric";
-          src: url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXS-Regular.woff2") format('woff2'),
-               url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXS-Regular.woff") format('woff');
-        }
-        @font-face {
-          font-family: "Metric";
-          src: url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXS-Bold.woff2") format('woff2'),
-               url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXS-Bold.woff") format('woff');
-          font-weight: 700;
-        }
-        @font-face {
-          font-family: "Metric";
-          src: url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXSSemibold-Regular.woff2") format('woff2'),
-               url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXSSemibold-Regular.woff") format('woff');
-          font-weight: 600;
-        }
-        @font-face {
-          font-family: "Metric";
-          src: url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXSMedium-Regular.woff2") format('woff2'),
-               url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXSMedium-Regular.woff") format('woff');
-          font-weight: 500;
-        }
-        @font-face {
-          font-family: "Metric";
-          src: url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXSLight-Regular.woff2") format('woff2'),
-               url("https://d3hq6blov2iije.cloudfront.net/fonts/HPEXS-Metric-Fonts/MetricHPEXSLight-Regular.woff") format('woff');
-          font-weight: 100;
-        }`,
-    },
+    
     control: {
       border: {
         width: '0px'
@@ -57,9 +25,11 @@ export const theme = deepMerge(grommet, {
       }
     },
     colors: {
-      'c1': {dark: '', light: '#FFFFFF'},
-      'c2': { dark: '', light: '#F3F5FA'},
-      'c3': { dark: '', light: '#00897B'}
+      'c0': { dark: undefined, light: undefined},
+      'c1': { dark: '#131823', light: '#FFFFFF'},
+      'c2': { dark: '#06070A', light: '#F3F5FA'},
+      'c3': { dark: '#00897B', light: '#00897B'},
+      'c4': { dark: '#2F8AF5', lght: '#2F8AF5'}
     }
   },
   layer: {

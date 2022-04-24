@@ -74,7 +74,7 @@ export interface ITransaction {
 
 export type ChainConfig = {
   name: string;
-  image?: string;
+  image: string;
   subText: string;
   chainId: number;
   rpcUrl: string;
