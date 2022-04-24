@@ -25,7 +25,7 @@ interface ISwapContext {
 const SwapContext = createContext<ISwapContext | null>(null);
 
 export default function SwapProvider({ children }: { children: ComponentChildren }) {
-  const { currentChainId, accounts } = useWalletProvider()!;
+  const { currentChain, accounts } = useWalletProvider()!;
   const { swapApiBaseUrl, defaultChainId, debug } = useConfig();
   const [oneInchApi, setOneInchApi] = useState<OneInchApi | undefined>();
   const [allowanceAmount, setAllowanceAmount] = useState<string | undefined>();
@@ -47,9 +47,9 @@ export default function SwapProvider({ children }: { children: ComponentChildren
   }, [])
 
   useEffect(() => {
-    if (!oneInchApi || !currentChainId) return;
-    oneInchApi.setCurrentChainId(currentChainId);
-  }, [currentChainId])
+    if (!oneInchApi || !currentChain) return;
+    oneInchApi.setCurrentChainId(currentChain.chainId);
+  }, [currentChain])
 
   useEffect(() => {
     if (!oneInchApi) return;
@@ -62,7 +62,6 @@ export default function SwapProvider({ children }: { children: ComponentChildren
   }, [oneInchApi])
 
   useEffect(() => {
-    console.log('arre')
     if (!oneInchApi || !accounts || !toToken) return;
     (async () => {
       const { allowance } = await oneInchApi.getAllowanceAmount({ tokenAddress: toToken.address, walletAddress: accounts[0] })
