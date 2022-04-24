@@ -1,3 +1,5 @@
+import { grommet, ThemeType } from "grommet";
+import { deepMerge } from "grommet/utils";
 
 export const ERC20Abi = [
   // Read-Only Functions
@@ -9,7 +11,7 @@ export const ERC20Abi = [
   "event Approval(address indexed owner, address indexed spender, uint value)"
 ];
 
-export const theme = {
+export const theme = deepMerge(grommet, {
   global: {
     font: {
       family: "'Metric', Arial, sans-serif",
@@ -53,6 +55,11 @@ export const theme = {
       outline: {
         size: '0px'
       }
+    },
+    colors: {
+      'c1': {dark: '', light: '#FFFFFF'},
+      'c2': { dark: '', light: '#F3F5FA'},
+      'c3': { dark: '', light: '#00897B'}
     }
   },
   layer: {
@@ -84,4 +91,4 @@ export const theme = {
     }
   },
 
-};
+});
