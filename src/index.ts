@@ -14,8 +14,12 @@ const defaultConfig: Configurations = {
   rpcUrls: {
     ethereum: {
       mainnet: '',
-      rinkeby: '',
     }
+  },
+  bcnmyApiKeys: {
+    avalanche: '',
+    ethereum: '',
+    polygon: ''
   },
   swapApiBaseUrl: 'https://api.1inch.io/v4.0',
   style: {},
