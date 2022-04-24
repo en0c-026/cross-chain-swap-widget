@@ -12,8 +12,12 @@ export interface AppConfigurations {
   rpcUrls: {
     ethereum: {
       mainnet: string;
-      rinkeby: string;
     }
+  };
+  bcnmyApiKeys: {
+    avalanche: string;
+    ethereum: string;
+    polygon: string;
   };
   style: StyleConfig;
   targetId: string;
@@ -28,7 +32,6 @@ export type CustomBox = Omit<
   'onClick' |
   'basis' |
   'animation' |
-  'focusIndicator' |
   'hoverIndicator' |
   'tag' |
   'as' |
@@ -68,3 +71,23 @@ export interface ITransaction {
   gasPrice: string,
   gas: string
 }
+
+export type ChainConfig = {
+  name: string;
+  image?: string;
+  subText: string;
+  chainId: number;
+  rpcUrl: string;
+  currency: string;
+  nativeDecimal: number;
+  nativeToken: string;
+  nativeFaucetURL: string;
+  biconomy: {
+    enable: boolean;
+    apiKey: string;
+  };
+  assetSentTopicId: string;
+  networkAgnosticTransfer: boolean;
+  graphURL: string;
+  explorerUrl: string;
+};
