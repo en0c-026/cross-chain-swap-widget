@@ -11,9 +11,11 @@ export const ERC20Abi = [
   "event Approval(address indexed owner, address indexed spender, uint value)"
 ];
 
+export const NATIVE_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+
 export const theme = deepMerge(grommet, {
   global: {
-    
+
     control: {
       border: {
         width: '0px'
@@ -25,11 +27,11 @@ export const theme = deepMerge(grommet, {
       }
     },
     colors: {
-      'c0': { dark: undefined, light: undefined},
-      'c1': { dark: '#131823', light: '#FFFFFF'},
-      'c2': { dark: '#06070A', light: '#F3F5FA'},
-      'c3': { dark: '#00897B', light: '#00897B'},
-      'c4': { dark: '#2F8AF5', lght: '#2F8AF5'}
+      'c0': { dark: undefined, light: undefined },
+      'c1': { dark: '#131823', light: '#FFFFFF' },
+      'c2': { dark: '#06070A', light: '#F3F5FA' },
+      'c3': { dark: '#00897B', light: '#00897B' },
+      'c4': { dark: '#2F8AF5', lght: '#2F8AF5' }
     }
   },
   layer: {
@@ -38,18 +40,15 @@ export const theme = deepMerge(grommet, {
       intelligentRounding: true,
     },
   },
-  checkBox: {
-    size: '18px'
-  },
-  radioButton: {
-    size: '18px'
-  },
   select: {
     options: {
       container: {
         size: '5px'
       }
     }
+  },
+  textInput: {
+    extend: `width: 120px; padding: 4px;`
   },
   tip: {
     content: {
@@ -58,6 +57,20 @@ export const theme = deepMerge(grommet, {
       margin: "none",
       pad: "small",
       round: "small"
+    }
+  },
+  notification: {
+    container: {
+      border: {
+        size: '2px',
+        style: 'solid',
+        color: '#FF0000'
+      },
+      round: true
+    },
+    title: {
+      weight: 'normal',
+      size: 'small'
     }
   },
 

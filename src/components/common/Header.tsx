@@ -1,8 +1,8 @@
 import { Avatar, Button, Text } from 'grommet'
-import { h } from 'preact'
-import { useConfig } from '../context';
-import { useRouter } from '../layout/Router'
-import Container from './Container';
+import React from 'react'
+import { useConfig } from '../../context';
+import { useRouter } from '../../layout/Router'
+import Container from '../Container';
 
 
 const ButtonTitle = ({ active, path, label }) => (
@@ -21,7 +21,7 @@ const ButtonTitle = ({ active, path, label }) => (
   </Container>
 );
 
-export default function Header() {
+export const Header = () => {
   const { setRoute, route } = useRouter();
   const { style: { header } } = useConfig();
   return (

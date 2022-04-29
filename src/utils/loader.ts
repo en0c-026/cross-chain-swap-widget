@@ -1,5 +1,4 @@
-
-import { AppConfigurations, Configurations } from './models';
+import { AppConfigurations, Configurations } from "../models";
 
 type MethodNames = 'init' | 'event';
 export const DEFAULT_NAME = '_hw';
@@ -28,7 +27,7 @@ export default (
   win: Window,
   defaultConfig: Configurations,
   scriptElement: Element | null,
-  render: (element: any, config: Configurations) => void) => {
+  render: (element: Element, config: Configurations) => void) => {
 
   // get a hold of script tag instance, which has an
   // attribute `id` with unique identifier of the widget instance
@@ -47,7 +46,7 @@ export default (
   }
 
   // this will an root element of the widget instance
-  let targetElement: Element;
+  let targetElement;
 
   // iterate over all methods that were called up until now
   for (let i = 0; i < loaderObject.q.length; i++) {
@@ -71,7 +70,7 @@ export default (
         const wrappingElement = loadedObject.element ?? win.document.body;
         if (loadedObject.targetId) {
           let targetElement = wrappingElement.querySelector(`#${loadedObject.targetId}`);
-          render(targetElement, loadedObject);
+          render(targetElement!, loadedObject);
           win[`loaded-${instanceName}`] = true;
           break;
         } else {

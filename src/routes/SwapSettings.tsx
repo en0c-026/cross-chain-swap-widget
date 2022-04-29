@@ -1,5 +1,5 @@
 import { Text } from 'grommet';
-import { h } from 'preact';
+import React from 'react';
 import Container from '../components/Container';
 
 export default function SwapSettings() {

@@ -1,22 +1,22 @@
-import { h } from 'preact';
+import React from 'react';
 import { Router, RouteComponent } from './Router';
 import { Grommet } from 'grommet';
 import { theme } from '../constants';
-import HyphenBridge from '../routes/HyphenBridge';
 import { useConfig, useTheme } from '../context';
-import OneInchTrade from '../routes/OneInchTrade';
+import { useWalletProvider } from '../context/common/WalletProvider';
+import { Bridge } from '../routes/Bridge';
+import { Swap } from '../routes/Swap';
 import Container from '../components/Container';
-import AccountManager from '../components/AccountManager';
-import SwapSettings from '../routes/SwapSettings';
-import { useWalletProvider } from '../context/WalletProvider';
-import ChainSelector from '../components/selectors/ChainSelector';
-import ThemeSelector from '../components/selectors/ThemeSelector';
+import { AccountManager } from '../components/common/AccountManager';
+import { NetworkSelector } from '../components/common/NetworkSelector';
+import { ThemeSelector } from '../components/common/ThemeSelector';
+//import SwapSettings from '../routes/SwapSettings';
 
 
 const Main = () => {
   const { style: { mainContainer } } = useConfig();
   const { themeMode, setThemeMode } = useTheme()!;
-  const { chainsSupported, currentChain, switchChain } = useWalletProvider()!;
+  const { chainsSupported, currentChain, switchChain, isLoggedIn } = useWalletProvider()!;
   return (
     <Grommet theme={theme} themeMode={themeMode}>
       <Container
@@ -35,7 +35,7 @@ const Main = () => {
           height: mainContainer?.height,
           justify: mainContainer?.justify,
           margin: mainContainer?.margin,
-          pad: mainContainer?.pad ? mainContainer.pad : 'small',
+          pad: mainContainer?.pad ? mainContainer.pad : 'medium',
           responsive: mainContainer?.responsive,
           round: mainContainer?.round ? mainContainer.round : 'medium',
           width: mainContainer?.width ? mainContainer.width : { max: '450px' }
@@ -54,7 +54,8 @@ const Main = () => {
           {
             currentChain &&
             (
-              <ChainSelector
+              <NetworkSelector
+                isLoggedIn={isLoggedIn}
                 currentChain={currentChain}
                 chainsSupported={chainsSupported}
                 switchChain={switchChain}
@@ -65,9 +66,8 @@ const Main = () => {
         </Container>
         <Router
           routes={{
-            '/': <RouteComponent component={HyphenBridge} />,
-            '/1inch-trade': <RouteComponent component={OneInchTrade} />,
-            '/swap-settings': <RouteComponent component={SwapSettings} />
+            '/': <RouteComponent component={Bridge} />,
+            '/1inch-trade': <RouteComponent component={Swap} />,
           }} />
       </Container>
     </Grommet>

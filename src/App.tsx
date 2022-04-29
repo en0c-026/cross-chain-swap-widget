@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import { Configurations } from './models';
 import Main from './layout/Main';
 import { WidgetProviders } from './context';

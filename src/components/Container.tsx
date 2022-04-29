@@ -1,15 +1,17 @@
 import { Box } from 'grommet'
-import { h, ComponentChildren } from 'preact'
+import React, { ReactNode } from 'react';
 import { CustomBox } from '../models'
 
 type ContainerProps = {
   style: CustomBox;
-  children: ComponentChildren
+  children: ReactNode;
+  id?: string;
 }
 
-export default function Container({ children, style }: ContainerProps) {
+export default function Container({ children, style, id }: ContainerProps) {
   return (
     <Box
+    id={id}
       align={style.align}
       alignContent={style.alignContent}
       alignSelf={style.alignSelf}

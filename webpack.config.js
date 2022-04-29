@@ -77,11 +77,7 @@ module.exports = (env) => {
                   '@babel/proposal-class-properties',
                   '@babel/proposal-object-rest-spread',
                   // transpile JSX/TSX to JS
-                  ['@babel/plugin-transform-react-jsx', {
-                    // we use Preact, which has `Preact.h` instead of `React.createElement`
-                    pragma: 'h',
-                    pragmaFrag: 'Fragment'
-                  }]
+                  '@babel/plugin-transform-react-jsx'
                 ]
               }
             }
@@ -89,11 +85,7 @@ module.exports = (env) => {
         }]
     },
     resolve: {
-      extensions: ['*', '.js', '.ts', '.tsx'],
-      alias: {
-        'react': 'preact/compat',
-        'react-dom': 'preact/compat',
-    },
+      extensions: ['*', '.js', '.ts', '.tsx']
     }
   }];
 };

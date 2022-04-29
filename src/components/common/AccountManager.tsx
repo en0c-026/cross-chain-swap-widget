@@ -1,7 +1,7 @@
-import { h } from 'preact'
-import Container from './Container'
+import React from 'react'
+import Container from '../Container'
 import { Button, Text } from 'grommet'
-import { useWalletProvider } from '../context/WalletProvider'
+import { useWalletProvider } from '../../context/common/WalletProvider'
 
 const ButtonTitle = ({title}: { title: string}) => {
   return (
@@ -19,7 +19,7 @@ const ButtonTitle = ({title}: { title: string}) => {
 }
 
 
-export default function AccountManager() {
+export const AccountManager = () => {
   const { connect, disconnect, isLoggedIn, accounts } = useWalletProvider()!;
 
   return (

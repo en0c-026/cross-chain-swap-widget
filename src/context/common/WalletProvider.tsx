@@ -1,10 +1,10 @@
-import { h, createContext, ComponentChildren } from "preact";
-import { useCallback, useContext, useEffect, useState } from "preact/hooks";
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
+
 import { JsonRpcSigner, Web3Provider } from "@ethersproject/providers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { useConfig } from ".";
-import { ChainConfig } from "../models";
+import { useConfig } from "..";
+import { ChainConfig } from "../../models";
 import { hexValue } from "@ethersproject/bytes";
 
 interface IWalletProviderContext {
@@ -23,7 +23,7 @@ interface IWalletProviderContext {
 
 const WalletProviderContext = createContext<IWalletProviderContext | null>(null);
 
-export default function WalletProviderProvider({ children }: { children: ComponentChildren }) {
+export default function WalletProviderProvider({ children }: { children: ReactNode }) {
 
   const { bcnmyApiKeys, infuraId, rpcUrls } = useConfig();
   const [accounts, setAccounts] = useState<string[]>();
@@ -52,7 +52,7 @@ export default function WalletProviderProvider({ children }: { children: Compone
       assetSentTopicId: "0xec1dcc5633614eade4a5730f51adc7444a5103a8477965a32f2e886f5b20f694",
       networkAgnosticTransfer: false, // Set this to enable network agnostic gasless transactions
       graphURL: "https://api.thegraph.com/subgraphs/name/divyan73/hyphen-avalanche",
-      explorerUrl: "https://snowtrace.io"
+      explorerUrl: "https://snowtrace.io/"
     },
     {
       name: "Ethereum",
@@ -90,7 +90,7 @@ export default function WalletProviderProvider({ children }: { children: Compone
       assetSentTopicId: "0xec1dcc5633614eade4a5730f51adc7444a5103a8477965a32f2e886f5b20f694",
       networkAgnosticTransfer: true,
       graphURL: "https://api.thegraph.com/subgraphs/name/divyan73/hyphenpolygonv2",
-      explorerUrl: "https://polygonscan.com",
+      explorerUrl: "https://polygonscan.com/",
     }
   ]
 
@@ -134,7 +134,10 @@ export default function WalletProviderProvider({ children }: { children: Compone
   // because provider does not fire events initially, we need to fetch initial values for current chain from walletProvider
   // subsequent changes to these values however do fire events, and we can just use those event handlers
   useEffect(() => {
-    if (!walletProvider) return;
+    if (!walletProvider) {
+      setCurrentChain(chainsSupported[2])
+      return
+    }
     (async () => {
       let { chainId } = await walletProvider.getNetwork();
       chainsSupported.map(chain => {
@@ -242,40 +245,41 @@ export default function WalletProviderProvider({ children }: { children: Compone
     setWalletProvider(undefined);
   }, [web3Modal]);
 
-  const switchChain = useCallback(async (targetChain: ChainConfig) => {
-    const chainIdHex = hexValue(targetChain.chainId);
-    console.log('chainIdHex', chainIdHex)
-    try {
-      await rawEthereumProvider.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: chainIdHex }]
-      })
-    } catch (error) {
+  const switchChain = useCallback(
+    async (targetChain: ChainConfig) => {
+      if (!rawEthereumProvider) return;
+      const chainIdHex = hexValue(targetChain.chainId);
       try {
-        if (error.code === 4902) {
-          await rawEthereumProvider.request({
-            method: 'wallet_addEthereumChain',
-            params: [{
-              chainId: chainIdHex,
-              blockExplorerUrls: [targetChain.explorerUrl],
-              chainName: targetChain.name,
-              iconUrls: [targetChain.image],
-              nativeCurrency: {
-                name: targetChain.name,
-                symbol: targetChain.currency,
-                decimals: targetChain.nativeDecimal,
-              },
-              rpcUrls: [targetChain.rpcUrl],
-            }],
-          })
-        } else {
+        await rawEthereumProvider.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: chainIdHex }]
+        })
+      } catch (error) {
+        try {
+          if (error.code === 4902) {
+            await rawEthereumProvider.request({
+              method: 'wallet_addEthereumChain',
+              params: [{
+                chainId: chainIdHex,
+                blockExplorerUrls: [targetChain.explorerUrl],
+                chainName: targetChain.name,
+                iconUrls: [targetChain.image],
+                nativeCurrency: {
+                  name: targetChain.name,
+                  symbol: targetChain.currency,
+                  decimals: targetChain.nativeDecimal,
+                },
+                rpcUrls: [targetChain.rpcUrl],
+              }],
+            })
+          } else {
+            console.log(error)
+          }
+        } catch (error) {
           console.log(error)
         }
-      } catch (error) {
-        console.log(error)
       }
-    }
-  }, [rawEthereumProvider])
+    }, [rawEthereumProvider])
 
   return (
     <WalletProviderContext.Provider

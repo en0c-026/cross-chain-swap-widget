@@ -1,17 +1,16 @@
+import React from 'react'
 import { Button } from 'grommet';
 import { Moon, Sun } from 'grommet-icons';
-import { h } from 'preact'
-import Container from '../Container';
 
 interface ThemeSelectorProps {
   themeMode: 'dark' | 'light';
   setThemeMode: (mode: 'dark' | 'light') => void;
 }
 
-export default function ThemeSelector ({
+export const ThemeSelector = ({
   themeMode,
   setThemeMode
-}: ThemeSelectorProps) {
+}: ThemeSelectorProps) => {
   return (
     <Button
       onClick={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}

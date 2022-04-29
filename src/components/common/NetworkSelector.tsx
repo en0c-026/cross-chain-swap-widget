@@ -1,9 +1,10 @@
 import { Avatar, Select, Text } from 'grommet'
-import { h } from 'preact'
+import React from 'react'
 import { ChainConfig } from '../../models'
 import Container from '../Container'
 
-interface ChainSelectorProps {
+interface NetworkSelectorProps {
+  isLoggedIn: boolean;
   currentChain: ChainConfig;
   chainsSupported: ChainConfig[];
   switchChain: (targetChain: ChainConfig) => Promise<void>;
@@ -22,7 +23,7 @@ const OptionLabel = ({
         direction: 'row',
         gap: 'xsmall',
         align: 'center',
-        pad: { vertical: 'xsmall', left: 'small', right: 'none'}
+        pad: { vertical: 'xsmall', left: 'small', right: 'none' }
       }}
     >
       <Avatar size='xsmall' src={image} />
@@ -32,13 +33,15 @@ const OptionLabel = ({
 }
 
 
-export default function ChainSelector({
+export const NetworkSelector = ({
+  isLoggedIn,
   currentChain,
   chainsSupported,
   switchChain
-}: ChainSelectorProps) {
+}: NetworkSelectorProps) => {
   return (
     <Select
+      disabled={!isLoggedIn}
       id="select-chain"
       size='small'
       name="select-chain"

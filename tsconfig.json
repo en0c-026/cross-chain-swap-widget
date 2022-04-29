@@ -16,16 +16,14 @@
     "strictNullChecks": true,
     "noImplicitReturns": true,
     "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": ".build",
-    "jsx": "react",
-    "jsxFactory": "h"
+    "jsx": "react-jsx",
   },
   "exclude": [
     "node_modules"
   ],
-  "types": [
-    "typePatches"
-  ]
 }

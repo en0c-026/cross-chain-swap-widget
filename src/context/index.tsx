@@ -1,8 +1,11 @@
-import { h, createContext, ComponentChildren } from 'preact';
+import React, { createContext, ReactNode, useContext, useState } from 'react';
 import { Configurations } from '../models';
-import { useContext, useState } from 'preact/hooks';
-import WalletProviderProvider from './WalletProvider';
-import SwapProvider from './Swap';
+import { NotificationsProvider } from './common/Notification';
+import WalletProviderProvider from './common/WalletProvider';
+import { ApprovalProvider } from './swap/Approval';
+import DexApiProvider from './swap/DexApi';
+import { SwapProvider } from './swap/Swap';
+import { TokensProvider } from './swap/Tokens';
 
 interface IThemeContext {
   themeMode: 'dark' | 'light';
@@ -13,22 +16,31 @@ const ConfigContext = createContext<Configurations>({} as Configurations);
 const ThemeContext = createContext<IThemeContext | null>(null);
 
 interface Props {
-  children: ComponentChildren;
+  children: ReactNode;
   config: Configurations;
 }
 
 export const WidgetProviders = ({ children, config }: Props) => {
   const [themeMode, setThemeMode] = useState<'dark' | 'light'>('light');
+
   if (config.style.themeMode) {
     setThemeMode(config.style.themeMode)
   }
   return (
     <ConfigContext.Provider value={config}>
-      <ThemeContext.Provider value={{ themeMode, setThemeMode}}>
+      <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
         <WalletProviderProvider>
-          <SwapProvider>
-            {children}
-          </SwapProvider>
+          <NotificationsProvider>
+            <DexApiProvider>
+              <TokensProvider>
+                <ApprovalProvider>
+                  <SwapProvider>
+                    {children}
+                  </SwapProvider>
+                </ApprovalProvider>
+              </TokensProvider>
+            </DexApiProvider>
+          </NotificationsProvider>
         </WalletProviderProvider>
       </ThemeContext.Provider>
     </ConfigContext.Provider>

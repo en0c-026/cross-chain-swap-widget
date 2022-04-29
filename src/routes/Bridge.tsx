@@ -1,14 +1,14 @@
-import { h } from 'preact';
+import React from 'react';
 // import { useState, useEffect } from 'preact/hooks';
 // import ModalConnect from '../components/ModalConnect/ModalConnect';
 import { Box } from 'grommet';
-import Header from '../components/Header';
+import {Header} from '../components/common/Header';
 import { useConfig } from '../context';
 // import PanelTrade from '../components/PanelTrade/PanelTrade';
 // import { actions } from '../constants';
 // import { useWeb3React } from '@web3-react/core';
 
-export default function HyphenBridge() {
+export const Bridge = () => {
   const { style } = useConfig();
 
     // const service = useService();

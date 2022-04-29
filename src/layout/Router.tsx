@@ -1,5 +1,4 @@
-import { h, createContext, VNode, ComponentType, createElement } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import React, { createContext, ReactNode, createElement, useContext, useState, FunctionComponent, HTMLAttributes, AnchorHTMLAttributes } from 'react';
 
 const DEFAULT_ROUTE = '/1inch-trade';
 
@@ -8,8 +7,8 @@ interface Props {
      * Specifies all URLs and their respectful components.
      */
     routes: {
-        [DEFAULT_ROUTE]: VNode;
-        [key: string]: VNode;
+        [DEFAULT_ROUTE]: ReactNode;
+        [key: string]: ReactNode;
     };
 }
 
@@ -32,7 +31,7 @@ export const Router = ({ routes }: Props) => {
     );
 };
 
-export const RouteComponent = (props: { component: ComponentType<null> }) =>
+export const RouteComponent = (props: { component: FunctionComponent<{}> }) =>
     createElement(props.component, null);
 
 /**
@@ -40,7 +39,7 @@ export const RouteComponent = (props: { component: ComponentType<null> }) =>
  * We intentionally override final `href`, so links within widget won't lead to actual
  * pages on website.
  */
-export const RouteLink = ({ href, children, ...rest }: h.JSX.HTMLAttributes<HTMLAnchorElement>) => (
+export const RouteLink = ({ href, children, ...rest }: AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <RouterContext.Consumer>
         {({ setRoute }) => (
             <a href='javascript:' onClick={() => href && setRoute(href)} {...rest}>{children}</a>

@@ -1,4 +1,5 @@
-import { h, render } from 'preact';
+import { createElement } from 'react'
+import ReactDOM from 'react-dom';
 import { App } from './App';
 import loader from './utils/loader';
 import { Configurations } from './models';
@@ -31,4 +32,5 @@ loader(
   window,
   defaultConfig,
   window.document.currentScript,
-  (el, config) => render(h(App, { ...config, element: el }), el));
+  (el, config) => ReactDOM.render(createElement(App, {element: el, ...config}), el)
+);
